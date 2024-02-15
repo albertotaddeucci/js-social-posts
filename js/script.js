@@ -30,10 +30,18 @@ const posts = [
     },    
 ];
 
+
+
 //variabile che bersaglia html
 const mainElement = document.getElementById("main-element");
 
-posts.forEach(actualPost => {
+const arrayIdLiked = []
+
+posts.forEach((actualPost,index) => {
+
+    
+    
+    
 
     //variabili per creare elementi da mettere in pagina
     const postElement = document.createElement("div");
@@ -53,14 +61,17 @@ posts.forEach(actualPost => {
 
     const imgContainerElement = document.createElement("div");
 
+    const rowButton = document.createElement("div")
+    rowButton.classList = "row row-cols-2 justify-content-around my-3 align-items-center"
+
 
     const buttonLeftElement = document.createElement("button");
     buttonLeftElement.innerHTML = "Mi piace"
-    buttonLeftElement.classList = "btn my-3 ps-4 fw-bold ms-5 me-5"
+    buttonLeftElement.classList = " fw-bold col-3 ms-5 border-0 bg-body-secondary"
 
-    const buttonRightElement = document.createElement("button");
-    buttonRightElement.innerHTML = "Piace a 80 persone"
-    buttonRightElement.classList = "btn my-3  fw-bold ms-5"
+    const spanElement = document.createElement("span");
+    spanElement.classList = " fw-bold col-5"
+    spanElement.innerHTML = `Piace a ${actualPost.likes} persone`
     
 
     for(let key in actualPost){
@@ -96,17 +107,32 @@ posts.forEach(actualPost => {
         }
     }
 
+    buttonLeftElement.addEventListener("click",function(){
+        buttonLeftElement.classList.add("active");
+        document.querySelector(`#main-element div:nth-of-type(${index+1}) span`).innerHTML = `Piace a ${actualPost.likes++ + 1} persone`
+        document.querySelector(`#main-element div:nth-of-type(${index+1}) span`).classList.add("liked");
+
+        if(!this.classList.contains("liked")){
+            arrayIdLiked.push(actualPost.id)
+
+            console.log(arrayIdLiked)
+        }
+        
+        
+    })
+
+
+
     mainElement.append(postElement);
 
     postElement.append(rowElement);
     rowElement.append(photoContainerElement,infoElement);
     postElement.append(textElement);
     postElement.append(imgContainerElement);
+    postElement.append(rowButton)
 
-    postElement.append(buttonLeftElement,buttonRightElement)
-
-
-
+    rowButton.append(buttonLeftElement,spanElement)
 
 
+    
 })
