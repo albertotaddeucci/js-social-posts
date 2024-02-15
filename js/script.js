@@ -29,3 +29,44 @@ const posts = [
       likes: 50,
     },    
 ];
+
+//variabile che bersaglia html
+const mainElement = document.getElementById("main-element");
+
+posts.forEach(actualPost => {
+
+    const postElement = document.createElement("div");
+
+    const rowElement = document.createElement("div");
+
+    const photoContainerElement = document.createElement("div");
+    const infoElement = document.createElement("div");
+    const textElement = document.createElement("p");
+    const imgElement = document.createElement("div");
+    
+
+    for(let key in actualPost){
+        if (key == "author"){
+            const authorElement = document.createElement("h2");
+            authorElement.innerHTML = actualPost.author;
+            infoElement.append(authorElement);
+        } else if (key == "photo"){
+            const photoElement = document.createElement("img");
+            photoElement.src = actualPost.photo;
+            photoContainerElement.append(photoElement);
+            
+        }
+    }
+
+    mainElement.append(postElement);
+
+    postElement.append(rowElement);
+    rowElement.append(photoContainerElement,infoElement);
+    postElement.append(textElement);
+    postElement.append(imgElement);
+
+
+
+
+
+})
