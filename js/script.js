@@ -35,11 +35,12 @@ const mainElement = document.getElementById("main-element");
 
 posts.forEach(actualPost => {
 
+    //variabili per creare elementi da mettere in pagina
     const postElement = document.createElement("div");
     postElement.classList = "col-8 bg-body-secondary mb-5";
 
     const rowElement = document.createElement("div");
-    rowElement.classList = "row"
+    rowElement.classList = "row pt-2"
 
     const photoContainerElement = document.createElement("div");
     photoContainerElement.classList = "col-3"
@@ -47,22 +48,30 @@ posts.forEach(actualPost => {
     const infoElement = document.createElement("div");
     infoElement.classList = "col-9"
 
-
     const textElement = document.createElement("p");
 
     const imgContainerElement = document.createElement("div");
+
+
+    const buttonLeftElement = document.createElement("button");
+    buttonLeftElement.innerHTML = "Mi piace"
+    buttonLeftElement.classList = "btn my-3 ps-4 fw-bold ms-5 me-5"
+
+    const buttonRightElement = document.createElement("button");
+    buttonRightElement.innerHTML = "Piace a 80 persone"
+    buttonRightElement.classList = "btn my-3  fw-bold ms-5"
     
 
     for(let key in actualPost){
         if (key == "author"){
-            const authorElement = document.createElement("h2");
+            const authorElement = document.createElement("h3");
             authorElement.innerHTML = actualPost.author;
             infoElement.append(authorElement);
         } else if (key == "photo"){
             const photoElement = document.createElement("img");
             photoElement.src = actualPost.photo;
 
-            photoElement.style = "width: 80px; border-radius: 50%"
+            photoElement.style = "width: 70px; border-radius: 50%"
 
             photoContainerElement.append(photoElement);            
         } else if (key == "date"){
@@ -88,6 +97,8 @@ posts.forEach(actualPost => {
     rowElement.append(photoContainerElement,infoElement);
     postElement.append(textElement);
     postElement.append(imgContainerElement);
+
+    postElement.append(buttonLeftElement,buttonRightElement)
 
 
 
