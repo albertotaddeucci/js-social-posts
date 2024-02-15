@@ -42,7 +42,7 @@ posts.forEach(actualPost => {
     const photoContainerElement = document.createElement("div");
     const infoElement = document.createElement("div");
     const textElement = document.createElement("p");
-    const imgElement = document.createElement("div");
+    const imgContainerElement = document.createElement("div");
     
 
     for(let key in actualPost){
@@ -53,8 +53,15 @@ posts.forEach(actualPost => {
         } else if (key == "photo"){
             const photoElement = document.createElement("img");
             photoElement.src = actualPost.photo;
-            photoContainerElement.append(photoElement);
-            
+            photoContainerElement.append(photoElement);            
+        } else if (key == "date"){
+            const dateElement = document.createElement("div");
+            dateElement.innerHTML = actualPost.date;
+            infoElement.append(dateElement);            
+        } else if (key == "image"){
+            const imgElement = document.createElement("img")
+            imgElement.src = actualPost.image;
+            imgContainerElement.append(imgElement);
         }
     }
 
@@ -63,7 +70,7 @@ posts.forEach(actualPost => {
     postElement.append(rowElement);
     rowElement.append(photoContainerElement,infoElement);
     postElement.append(textElement);
-    postElement.append(imgElement);
+    postElement.append(imgContainerElement);
 
 
 
