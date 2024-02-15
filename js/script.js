@@ -48,28 +48,32 @@ posts.forEach((actualPost,index) => {
     const rowElement = document.createElement("div");
     rowElement.classList = "row pt-2 align-items-center"
 
+    //div per foto profilo
     const photoContainerElement = document.createElement("div");
-    photoContainerElement.classList = "col-3"
+    photoContainerElement.classList = "col-3 d-flex justify-content-center position-relative"    
     
-
+    //div per nome e data
     const infoElement = document.createElement("div");
     infoElement.classList = "col-9"
 
+    //div per testo
     const textElement = document.createElement("p");
-    textElement.classList = "pt-3"
+    textElement.classList = "pt-3 fs-5"
 
     const imgContainerElement = document.createElement("div");
 
+
+    //row che contiene bottone e counter "mi piace"
     const rowButton = document.createElement("div")
-    rowButton.classList = "row row-cols-2 justify-content-around my-3 align-items-center"
+    rowButton.classList = "row row-cols-2 justify-content-evenly my-3 fs-5"
 
 
     const buttonLeftElement = document.createElement("button");
     buttonLeftElement.innerHTML = `<i class="fa-solid fa-thumbs-up"></i> Mi piace`
-    buttonLeftElement.classList = "col-3 ms-5 border-0 bg-transparent"
+    buttonLeftElement.classList = "col-6 col-lg-4 border-0 bg-transparent p-2"
 
     const spanElement = document.createElement("span");
-    spanElement.classList = "col-5"
+    spanElement.classList = "col-6 col-lg-4 p-2"
     spanElement.innerHTML = `Piace a <b> ${actualPost.likes} </b> persone`
     
 
@@ -79,7 +83,7 @@ posts.forEach((actualPost,index) => {
         if (key == "author"){
             const authorElement = document.createElement("h3");
             authorElement.innerHTML = actualPost.author;
-            authorElement.classList = "m-0 fs-4"
+            authorElement.classList = "m-0"
 
             infoElement.append(authorElement);
 
@@ -91,20 +95,30 @@ posts.forEach((actualPost,index) => {
             //se manca la foto-profilo
             if(actualPost.photo == ""){
                 const substitutePhotoElement = document.createElement("div");
+
+                photoElement.src = "https://fastly.picsum.photos/id/255/150/150.jpg?hmac=ZVq_hMvNCztcmGBGTm_bqKUiMmmSGYTw35OJ-o8zpjo";
+                photoContainerElement.append(photoElement);
+                photoElement.style = "width: 70%; border-radius: 50%; filter: opacity(0)";
+                photoElement.classList = "align-content-center" ;
+
+
                 let NameMaiusc = actualPost.author.charAt(0).toUpperCase();
                 let SurMaiusc = actualPost.author.charAt(actualPost.author.indexOf(" ")+1).toUpperCase();
                 substitutePhotoElement.innerHTML = NameMaiusc + SurMaiusc
-                substitutePhotoElement.classList = "text-center mt-3 fw-bold"
-
+                substitutePhotoElement.classList += "fw-bold fs-2 position-absolute top-50 translate-middle-y";
+                photoContainerElement.style = "height: 80% ;"
+                      
+                
                 photoContainerElement.append(substitutePhotoElement);
             } else {
                 photoElement.src = actualPost.photo;
+                photoElement.style = "width: 70%; border-radius: 50%"
+                photoElement.classList = "align-content-center"
+                photoContainerElement.append(photoElement); 
                 
             }
 
-            photoElement.style = "width: 70px; border-radius: 50%"
 
-            photoContainerElement.append(photoElement); 
             
             
             //per inserire data
@@ -138,6 +152,7 @@ posts.forEach((actualPost,index) => {
     buttonLeftElement.addEventListener("click",function(){
 
         if (!this.classList.contains("active")){
+            console.log(index)
 
 
             document.querySelector(`#main-element div:nth-of-type(${index + 1}) span`).innerHTML = `Piace a <b> ${actualPost.likes+1} </b> persone`;
@@ -151,7 +166,7 @@ posts.forEach((actualPost,index) => {
             
         } 
         else {
-            document.querySelector(`#main-element div:nth-of-type(${index+1}) span`).innerHTML = `Piace a ${actualPost.likes} persone`;
+            document.querySelector(`#main-element div:nth-of-type(${index+1}) span`).innerHTML = `Piace a <b> ${actualPost.likes} </b> persone`;
             
             
         }        
