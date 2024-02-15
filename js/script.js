@@ -26,8 +26,9 @@ const posts = [
       date: "02-13-2024",
       text: "Condivido questa bella foto!",
       image: "https://fastly.picsum.photos/id/391/500/350.jpg?hmac=Vc4aNyqB1sibkCj6haOxC-H-CBCFg9jWAtPAAW4zOhg",
-      likes: 50,
-    },    
+      likes: 30,
+    }
+    
 ];
 
 
@@ -38,14 +39,11 @@ const mainElement = document.getElementById("main-element");
 const arrayIdLiked = []
 
 posts.forEach((actualPost,index) => {
-
-    
-    
-    
+    console.log(actualPost,index)
 
     //variabili per creare elementi da mettere in pagina
     const postElement = document.createElement("div");
-    postElement.classList = "col-8 bg-body-secondary mb-5";
+    postElement.classList = "col-8 mb-5 my_background rounded-3";
 
     const rowElement = document.createElement("div");
     rowElement.classList = "row pt-2 align-items-center"
@@ -67,21 +65,26 @@ posts.forEach((actualPost,index) => {
 
 
     const buttonLeftElement = document.createElement("button");
-    buttonLeftElement.innerHTML = "Mi piace"
-    buttonLeftElement.classList = " fw-bold col-3 ms-5 border-0 bg-body-secondary"
+    buttonLeftElement.innerHTML = `<i class="fa-solid fa-thumbs-up"></i> Mi piace`
+    buttonLeftElement.classList = "col-3 ms-5 border-0 bg-transparent"
 
     const spanElement = document.createElement("span");
-    spanElement.classList = " fw-bold col-5"
-    spanElement.innerHTML = `Piace a ${actualPost.likes} persone`
+    spanElement.classList = "col-5"
+    spanElement.innerHTML = `Piace a <b> ${actualPost.likes} </b> persone`
     
 
     for(let key in actualPost){
+
+        //per inserire nome e cognome
         if (key == "author"){
             const authorElement = document.createElement("h3");
             authorElement.innerHTML = actualPost.author;
             authorElement.classList = "m-0 fs-4"
 
             infoElement.append(authorElement);
+
+
+           //per inserire foto profilo 
         } else if (key == "photo"){
             const photoElement = document.createElement("img");
             
@@ -99,10 +102,12 @@ posts.forEach((actualPost,index) => {
                 
             }
 
-
             photoElement.style = "width: 70px; border-radius: 50%"
 
-            photoContainerElement.append(photoElement);            
+            photoContainerElement.append(photoElement); 
+            
+            
+            //per inserire data
         } else if (key == "date"){
             const dateElement = document.createElement("div");
             dateElement.innerHTML = new Date(actualPost.date).toLocaleDateString('it-IT');
@@ -110,7 +115,9 @@ posts.forEach((actualPost,index) => {
 
             dateElement.classList = "fs-6"
 
-            infoElement.append(dateElement);            
+            infoElement.append(dateElement); 
+            
+            //per inserire immagine
         } else if (key == "image"){
             const imgElement = document.createElement("img");
             imgElement.src = actualPost.image;
@@ -118,38 +125,43 @@ posts.forEach((actualPost,index) => {
             imgElement.style = "width: 100%"
 
             imgContainerElement.append(imgElement);
+
+
+            //per inserire testo
         } else if (key == "text"){
             textElement.innerHTML = actualPost.text;
 
         }
     }
 
+    //click bottone "mi piace"
     buttonLeftElement.addEventListener("click",function(){
-        
+
         if (!this.classList.contains("active")){
-            document.querySelector(`#main-element div:nth-of-type(${index+1}) span`).innerHTML = `Piace a ${actualPost.likes++ + 1} persone`
-            document.querySelector(`#main-element div:nth-of-type(${index+1}) span`).classList.add("liked");
+
+
+            document.querySelector(`#main-element div:nth-of-type(${index + 1}) span`).innerHTML = `Piace a <b> ${actualPost.likes+1} </b> persone`;
+            document.querySelector(`#main-element div:nth-of-type(${index + 1}) span`).classList.add("liked");
             
             if(!this.classList.contains("liked")){
-                arrayIdLiked.push(actualPost.id)
+                arrayIdLiked.push(actualPost.id);
                 
                 console.log(arrayIdLiked)
             }
             
-        } else {
-            document.querySelector(`#main-element div:nth-of-type(${index+1}) span`).innerHTML = `Piace a ${actualPost.likes-- -1} persone`
+        } 
+        else {
+            document.querySelector(`#main-element div:nth-of-type(${index+1}) span`).innerHTML = `Piace a ${actualPost.likes} persone`;
             
             
-        }
-        
+        }        
         
         buttonLeftElement.classList.toggle("active");
-        
         
     })
 
 
-
+    //vari append in pagina
     mainElement.append(postElement);
 
     postElement.append(rowElement);
@@ -164,7 +176,3 @@ posts.forEach((actualPost,index) => {
     
 })
 
-const currentDate = new Date();
-console.log(currentDate)
-console.log(currentDate.toLocaleDateString('it-IT'));
-//Freitag, 2. Juli 2021
