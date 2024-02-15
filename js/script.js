@@ -125,15 +125,25 @@ posts.forEach((actualPost,index) => {
     }
 
     buttonLeftElement.addEventListener("click",function(){
-        buttonLeftElement.classList.add("active");
-        document.querySelector(`#main-element div:nth-of-type(${index+1}) span`).innerHTML = `Piace a ${actualPost.likes++ + 1} persone`
-        document.querySelector(`#main-element div:nth-of-type(${index+1}) span`).classList.add("liked");
-
-        if(!this.classList.contains("liked")){
-            arrayIdLiked.push(actualPost.id)
-
-            console.log(arrayIdLiked)
+        
+        if (!this.classList.contains("active")){
+            document.querySelector(`#main-element div:nth-of-type(${index+1}) span`).innerHTML = `Piace a ${actualPost.likes++ + 1} persone`
+            document.querySelector(`#main-element div:nth-of-type(${index+1}) span`).classList.add("liked");
+            
+            if(!this.classList.contains("liked")){
+                arrayIdLiked.push(actualPost.id)
+                
+                console.log(arrayIdLiked)
+            }
+            
+        } else {
+            document.querySelector(`#main-element div:nth-of-type(${index+1}) span`).innerHTML = `Piace a ${actualPost.likes-- -1} persone`
+            
+            
         }
+        
+        
+        buttonLeftElement.classList.toggle("active");
         
         
     })
