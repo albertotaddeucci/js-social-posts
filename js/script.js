@@ -40,7 +40,7 @@ posts.forEach(actualPost => {
     postElement.classList = "col-8 bg-body-secondary mb-5";
 
     const rowElement = document.createElement("div");
-    rowElement.classList = "row pt-2"
+    rowElement.classList = "row pt-2 align-items-center"
 
     const photoContainerElement = document.createElement("div");
     photoContainerElement.classList = "col-3"
@@ -49,6 +49,7 @@ posts.forEach(actualPost => {
     infoElement.classList = "col-9"
 
     const textElement = document.createElement("p");
+    textElement.classList = "pt-3"
 
     const imgContainerElement = document.createElement("div");
 
@@ -66,6 +67,8 @@ posts.forEach(actualPost => {
         if (key == "author"){
             const authorElement = document.createElement("h3");
             authorElement.innerHTML = actualPost.author;
+            authorElement.classList = "m-0 fs-4"
+
             infoElement.append(authorElement);
         } else if (key == "photo"){
             const photoElement = document.createElement("img");
@@ -77,6 +80,8 @@ posts.forEach(actualPost => {
         } else if (key == "date"){
             const dateElement = document.createElement("div");
             dateElement.innerHTML = actualPost.date;
+            dateElement.classList = "fs-6"
+
             infoElement.append(dateElement);            
         } else if (key == "image"){
             const imgElement = document.createElement("img");
