@@ -4,7 +4,7 @@ const posts = [
     {
       id: 1,
       author: "Mario Rossi",
-      photo: "https://fastly.picsum.photos/id/656/150/150.jpg?hmac=cVwVPMxkfGYiZQg0FNIk7_OJA7qbWSiwZ9WU0J8QuGQ",
+      photo: "",
       date: "09-15-2023",
       text: "Questo è il primo post!",
       image: "https://fastly.picsum.photos/id/1049/500/350.jpg?hmac=rLYoBRfn-8WmagqQddBaNWKagYz5scRilAOtNVj8Aak",
@@ -52,6 +52,7 @@ posts.forEach((actualPost,index) => {
 
     const photoContainerElement = document.createElement("div");
     photoContainerElement.classList = "col-3"
+    
 
     const infoElement = document.createElement("div");
     infoElement.classList = "col-9"
@@ -83,14 +84,30 @@ posts.forEach((actualPost,index) => {
             infoElement.append(authorElement);
         } else if (key == "photo"){
             const photoElement = document.createElement("img");
-            photoElement.src = actualPost.photo;
+            
+            //se manca la foto-profilo
+            if(actualPost.photo == ""){
+                const substitutePhotoElement = document.createElement("div");
+                let NameMaiusc = actualPost.author.charAt(0).toUpperCase();
+                let SurMaiusc = actualPost.author.charAt(actualPost.author.indexOf(" ")+1).toUpperCase();
+                substitutePhotoElement.innerHTML = NameMaiusc + SurMaiusc
+                substitutePhotoElement.classList = "text-center mt-3 fw-bold"
+
+                photoContainerElement.append(substitutePhotoElement);
+            } else {
+                photoElement.src = actualPost.photo;
+                
+            }
+
 
             photoElement.style = "width: 70px; border-radius: 50%"
 
             photoContainerElement.append(photoElement);            
         } else if (key == "date"){
             const dateElement = document.createElement("div");
-            dateElement.innerHTML = actualPost.date;
+            dateElement.innerHTML = new Date(actualPost.date).toLocaleDateString('it-IT');
+
+
             dateElement.classList = "fs-6"
 
             infoElement.append(dateElement);            
@@ -136,3 +153,8 @@ posts.forEach((actualPost,index) => {
 
     
 })
+
+const currentDate = new Date();
+console.log(currentDate)
+console.log(currentDate.toLocaleDateString('it-IT'));
+//Freitag, 2. Juli 2021
