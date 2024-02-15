@@ -36,12 +36,20 @@ const mainElement = document.getElementById("main-element");
 posts.forEach(actualPost => {
 
     const postElement = document.createElement("div");
+    postElement.classList = "col-8 bg-body-secondary mb-5";
 
     const rowElement = document.createElement("div");
+    rowElement.classList = "row"
 
     const photoContainerElement = document.createElement("div");
+    photoContainerElement.classList = "col-3"
+
     const infoElement = document.createElement("div");
+    infoElement.classList = "col-9"
+
+
     const textElement = document.createElement("p");
+
     const imgContainerElement = document.createElement("div");
     
 
@@ -53,15 +61,24 @@ posts.forEach(actualPost => {
         } else if (key == "photo"){
             const photoElement = document.createElement("img");
             photoElement.src = actualPost.photo;
+
+            photoElement.style = "width: 80px; border-radius: 50%"
+
             photoContainerElement.append(photoElement);            
         } else if (key == "date"){
             const dateElement = document.createElement("div");
             dateElement.innerHTML = actualPost.date;
             infoElement.append(dateElement);            
         } else if (key == "image"){
-            const imgElement = document.createElement("img")
+            const imgElement = document.createElement("img");
             imgElement.src = actualPost.image;
+
+            imgElement.style = "width: 100%"
+
             imgContainerElement.append(imgElement);
+        } else if (key == "text"){
+            textElement.innerHTML = actualPost.text;
+
         }
     }
 
